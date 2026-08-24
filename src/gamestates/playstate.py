@@ -11,11 +11,10 @@ class PlayState:
         self.otherpipe = Pipe(screenWidth, screenHeight, rotation=1)
 
     def update (self, events):
-        self.pipe.newY(self.pipe.upMaxY)
         self.bird.update(events)
 
     def draw (self, screen):
         self.bird.draw(screen)
         self.pipe.draw(screen)
-        self.otherpipe.draw(screen)
+        # self.otherpipe.draw(screen)
         

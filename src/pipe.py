@@ -1,14 +1,19 @@
 import pygame
 
 class Pipe:
-    def __init__(self, screenWidth, screenHeight, rotation=0) -> None:
+    def __init__(
+            self,
+            screenWidth,
+            screenHeight,
+            rotation=0
+        ) -> None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
         self.speed = 5
 
         # For Up-Pipe
         self.upMinY = 0
-        self.upMaxY = self.screenHeight-60
+        self.upMaxY = self.screenHeight-80
 
         self.image = pygame.image.load("assets/pipe.png").convert_alpha()
         self.image = pygame.transform.smoothscale(self.image, (100, 500))
@@ -20,6 +25,7 @@ class Pipe:
         self.rect = self.image.get_rect(center=(100,500))
         self.hitbox = self.rect.inflate(-10, 0)
         self.hitbox.center = self.rect.center
+        self.upMinY = self.screenHeight-self.rect.height
         self.rect.y = self.upMinY
 
     def update (self):
@@ -28,5 +34,3 @@ class Pipe:
     def draw (self, screen):
         screen.blit(self.image, self.rect)
         # pygame.draw.rect(screen, "blue", self.rect, width=2)
-    def newY (self, pos):
-        self.rect.y = pos
