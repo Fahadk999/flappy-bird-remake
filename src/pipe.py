@@ -11,7 +11,6 @@ class Pipe:
         self.screenHeight = screenHeight
         self.speed = 5
 
-
         self.image = pygame.image.load("assets/pipe.png").convert_alpha()
         self.image = pygame.transform.smoothscale(self.image, (100, 500))
         self.rect = self.image.get_rect(center=(100,500))
@@ -31,9 +30,16 @@ class Pipe:
         self.hitbox.center = self.rect.center
 
     def update (self):
-        self.hitbox.center = self.rect.center
         self.rect.x -= self.speed
+        self.recenterHitbox()
 
     def draw (self, screen):
         screen.blit(self.image, self.rect)
         # pygame.draw.rect(screen, "blue", self.rect, width=2)
+    
+    def setPosY (self, posY):
+        self.rect.y = posY
+        self.recenterHitbox()
+
+    def recenterHitbox (self):
+        self.hitbox.center = self.rect.center
