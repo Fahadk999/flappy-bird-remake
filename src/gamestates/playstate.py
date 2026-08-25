@@ -19,13 +19,15 @@ class PlayState:
         self.pipeSpawnInterval = 1500
 
     def update (self, events, dt):
-        self.score += dt/1000
-        self.bird.update(events)
-        self.spawnPipe(dt)
-        for p in self.pipes:
-            p.update()
+        if self.bird.alive:
+            self.score += dt/1000
+            self.bird.update(events)
+            self.spawnPipe(dt)
+            for p in self.pipes:
+                p.update()
+                self.bird.collsion(p)
 
-        self.scoreTxt.updateText(f"Score: {int(self.score)}")
+            self.scoreTxt.updateText(f"Score: {int(self.score)}")
 
     def draw (self, screen):
         self.bird.draw(screen)

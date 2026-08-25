@@ -23,7 +23,7 @@ class Bird:
     def draw (self, screen):
         screen.blit(self.image, self.rect)
 
-    def update (self, events) -> bool:
+    def update (self, events):
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE: 
@@ -33,10 +33,10 @@ class Bird:
         self.rect.y += self.velY
         self.hitbox.center = self.rect.center
 
-        return self.alive
-
-    def collsion (self, other):
+    def collsion (self, other) -> bool:
         if self.hitbox.colliderect(other.rect):
             self.alive = False
+
+        return self.alive
 
 
