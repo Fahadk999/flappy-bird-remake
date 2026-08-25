@@ -17,6 +17,7 @@ playstate = PlayState(WIDTH, HEIGHT)
 
 running = True
 while running:
+    dt = clock.tick(60)
     events = pygame.event.get()
     for event in events:
         if event.type == pygame.QUIT:
@@ -28,12 +29,11 @@ while running:
     keys = pygame.key.get_pressed()
     # GameStates
     if currState == STATEPLAY:
-        playstate.update(events)
+        playstate.update(events, dt)
         playstate.draw(screen)
 
 
     pygame.display.flip()
-    clock.tick(60)
 
 pygame.quit()
 

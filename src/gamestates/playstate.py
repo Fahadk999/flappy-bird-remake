@@ -7,14 +7,27 @@ class PlayState:
         self.screenHeight = screenHeight
 
         self.bird = Bird(screenWidth, screenHeight)
-        self.pipe = Pipe(screenWidth, screenHeight)
-        self.otherpipe = Pipe(screenWidth, screenHeight, rotation=1)
+        self.pipes = []
 
-    def update (self, events):
+        self.pipeSpawnTimer = 0
+        self.pipeSpawnInterval = 1500
+
+    def update (self, events, dt):
         self.bird.update(events)
+        self.spawnPipe(dt)
+        for p in self.pipes:
+            p.update()
 
     def draw (self, screen):
         self.bird.draw(screen)
-        self.pipe.draw(screen)
-        # self.otherpipe.draw(screen)
+        for p in self.pipes:
+            p.draw(screen)
+
+    def spawnPipe (self, dt):
+        # every 1.5 seconds
+        self.pipeSpawnTimer += dt
+
+        if self.pipeSpawnTimer >= self.pipeSpawnInterval:
+            self.pipes.append(Pipe(self.screenWidth, self.screenHeight))
+            self.pipeSpawnTimer -= self.pipeSpawnInterval
         
