@@ -5,7 +5,6 @@ class Bird:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
         
-        self.alive = True
         self.gravity = 0.5
         self.jumpPower = -9.0
         self.velY = 0.0
@@ -35,8 +34,8 @@ class Bird:
 
     def collsion (self, other) -> bool:
         if self.hitbox.colliderect(other.rect):
-            self.alive = False
+            return True
 
-        return self.alive
+        return False
 
 

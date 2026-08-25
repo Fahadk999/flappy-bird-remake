@@ -8,6 +8,7 @@ class PlayState:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
 
+        self.currState = "PLAY"
         self.bird = Bird(screenWidth, screenHeight)
         self.pipes = []
         self.score = 0
@@ -19,15 +20,16 @@ class PlayState:
         self.pipeSpawnInterval = 1500
 
     def update (self, events, dt):
-        if self.bird.alive:
-            self.score += dt/1000
-            self.bird.update(events)
-            self.spawnPipe(dt)
-            for p in self.pipes:
-                p.update()
-                self.bird.collsion(p)
+        self.score += dt/1000
+        self.bird.update(events)
+        self.spawnPipe(dt)
+        for p in self.pipes:
+            p.update()
+            if self.bird.collsion(p):
+                self.currState = "OVER"
 
-            self.scoreTxt.updateText(f"Score: {int(self.score)}")
+        self.scoreTxt.updateText(f"Score: {int(self.score)}")
+        return self.currState
 
     def draw (self, screen):
         self.bird.draw(screen)
