@@ -43,5 +43,10 @@ class Bird:
             return True
 
         return False
-
-
+    
+    def resetBird (self):
+        self.rect = self.image.get_rect(center=(self.x,self.y))
+        self.velY = 0
+        self.angle = 0
+        self.image = self.origImg.copy()
+        self.hitbox.center = self.rect.center

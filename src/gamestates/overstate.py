@@ -1,3 +1,4 @@
+import pygame
 from src.ui.text import Text
 from src.ui.imageloader import LoadImage
 
@@ -8,8 +9,6 @@ class OverState:
         self.screenHeight = screenHeight
         self.overDisplay = LoadImage("assets/gameover.png", 1, self.screenWidth//2, self.screenHeight//2)
 
-
     def draw (self, screen):
         self.overDisplay.draw(screen)
 
-    

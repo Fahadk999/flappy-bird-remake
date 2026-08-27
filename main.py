@@ -25,20 +25,24 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            running = False
+        if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_ESCAPE:
+                running = False
+            elif event.key == pygame.K_r and currState == STATEOVER:
+                currState = STATEPLAY
+                playstate.resetGame()
+
+
     screen.fill(pygame.Color("lightblue"))
 
     keys = pygame.key.get_pressed()
     # GameStates
     if currState == STATEPLAY:
-        currState = playstate.update(events, dt)
+        currState = playstate.update(events, dt, currState)
         playstate.draw(screen)
     if currState == STATEOVER:
         playstate.draw(screen)
         overstate.draw(screen)
-
-
 
     pygame.display.flip()
 
