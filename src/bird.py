@@ -8,16 +8,16 @@ class Bird:
         self.gravity = 0.5
         self.jumpPower = -9.0
         self.velY = 0.0
+        self.angle = 0
+        self.x = self.screenWidth//5
+        self.y = self.screenHeight//2
 
-        self.image = pygame.image.load("assets/bird.png").convert_alpha()
-        self.image = pygame.transform.smoothscale(self.image, (60, 38))
-        self.rect = self.image.get_rect(center=(100,300))
+        self.origImg = pygame.image.load("assets/bird.png").convert_alpha()
+        self.origImg = pygame.transform.smoothscale(self.origImg, (60, 38))
+        self.image = self.origImg.copy()
+        self.rect = self.image.get_rect(center=(self.x,self.y))
         self.hitbox = self.rect.inflate(-20, 0)
         self.hitbox.center = self.rect.center
-        self.rect.topleft = (
-            self.screenWidth//5,
-            self.screenHeight//2 - self.rect.height//2
-        )
 
     def draw (self, screen):
         screen.blit(self.image, self.rect)
@@ -30,6 +30,12 @@ class Bird:
 
         self.velY += self.gravity
         self.rect.y += self.velY
+        # moving up velY is -ive
+        # so vice versa is down
+        self.angle = (self.angle+1)%360
+        self.image = pygame.transform.rotate(self.origImg, self.angle)
+        self.rect = self.image.get_rect(center=(self.x, self.y))
+
         self.hitbox.center = self.rect.center
 
     def collsion (self, other) -> bool:

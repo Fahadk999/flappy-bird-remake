@@ -1,22 +1,17 @@
 import pygame
-from src.gamestates.playstate import PlayState
-from src.gamestates.overstate import OverState
 
 pygame.init()
 
 WIDTH, HEIGHT = 1080, 720 
 
-STATEMENU = "MENU"
-STATEPLAY = "PLAY"
-STATEOVER = "OVER"
-
-currState = STATEPLAY
-
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
 
-playstate = PlayState(WIDTH, HEIGHT)
-overstate = OverState(WIDTH, HEIGHT) 
+img = pygame.image.load("assets/bird.png").convert_alpha()
+img = pygame.transform.smoothscale(img, (60, 38))
+pivot = (100,300)
+origRect = img.get_rect(center=pivot)
+angle = 0
 
 running = True
 while running:
@@ -28,17 +23,12 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
     screen.fill(pygame.Color("lightblue"))
+    angle = (angle-2)%360
 
-    keys = pygame.key.get_pressed()
-    # GameStates
-    if currState == STATEPLAY:
-        currState = playstate.update(events, dt)
-        playstate.draw(screen)
-    if currState == STATEOVER:
-        playstate.draw(screen)
-        overstate.draw(screen)
+    rotatedImg = pygame.transform.rotate(img,angle)
+    rotatedRect = rotatedImg.get_rect(center=pivot)
 
-
+    screen.blit(rotatedImg, rotatedRect)
 
     pygame.display.flip()
 
