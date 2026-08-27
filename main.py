@@ -1,4 +1,5 @@
 import pygame
+from src.gamestates.menustate import MenuState
 from src.gamestates.playstate import PlayState
 from src.gamestates.overstate import OverState
 
@@ -10,11 +11,12 @@ STATEMENU = "MENU"
 STATEPLAY = "PLAY"
 STATEOVER = "OVER"
 
-currState = STATEPLAY
+currState = STATEMENU
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
 
+menustate = MenuState(WIDTH, HEIGHT)
 playstate = PlayState(WIDTH, HEIGHT)
 overstate = OverState(WIDTH, HEIGHT) 
 
@@ -37,10 +39,12 @@ while running:
 
     keys = pygame.key.get_pressed()
     # GameStates
-    if currState == STATEPLAY:
+    if currState == STATEMENU:
+        menustate.draw(screen)
+    elif currState == STATEPLAY:
         currState = playstate.update(events, dt, currState)
         playstate.draw(screen)
-    if currState == STATEOVER:
+    elif currState == STATEOVER:
         playstate.draw(screen)
         overstate.draw(screen)
 
