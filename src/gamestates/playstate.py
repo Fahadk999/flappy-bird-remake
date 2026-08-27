@@ -26,6 +26,10 @@ class PlayState:
             p.update()
             if self.bird.collsion(p):
                currState = "OVER"
+        if self.bird.rect.y > self.screenHeight+200:
+           currState = "OVER"
+        elif self.bird.rect.y < -200:
+           currState = "OVER"
 
         self.scoreTxt.updateText(f"Score: {int(self.score)}")
         return currState
