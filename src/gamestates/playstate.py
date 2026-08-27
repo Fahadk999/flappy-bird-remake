@@ -12,7 +12,7 @@ class PlayState:
         self.pipes = []
         self.score = 0
         self.scoreStr = f"Score: {int(self.score)}"
-        self.scoreTxt = Text(self.scoreStr, 0, 0)
+        self.scoreTxt = Text(self.scoreStr, 75, 25)
 
         self.pipeGap = 200
         self.pipeSpawnTimer = 0
@@ -60,7 +60,7 @@ class PlayState:
         self.pipes.clear()
         self.score = 0
         self.scoreStr = f"Score: {int(self.score)}"
-        self.scoreTxt = Text(self.scoreStr, 0, 0)
+        self.scoreTxt = Text(self.scoreStr, 75, 25)
         self.pipeSpawnTimer = 0
         self.bird.resetBird()
         

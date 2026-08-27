@@ -8,7 +8,7 @@ class Text:
         self.text = str(text)
         self.font = pygame.font.Font(None, 48)
         self.surface = self.font.render(self.text, True, self.color)
-        self.rect = self.surface.get_rect(topleft=(self.posX, self.posY))
+        self.rect = self.surface.get_rect(center=(self.posX, self.posY))
         self.glow = False
         self.glowTimer = 0
         self.glowInterval = 300
@@ -21,9 +21,9 @@ class Text:
 
     def updateText (self, text):
         self.surface = self.font.render(str(text), True, self.color)
-        self.rect = self.surface.get_rect(topleft=(self.posX, self.posY))
+        self.rect = self.surface.get_rect(center=(self.posX, self.posY))
     def updatePox (self, newX=0, newY=0):
-        self.rect = self.surface.get_rect(topleft=(newX, newY))
+        self.rect = self.surface.get_rect(center=(newX, newY))
 
     def makeGlow (self, dt, glowColor="yellow"):
         if self.glow:
