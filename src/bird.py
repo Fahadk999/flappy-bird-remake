@@ -32,7 +32,7 @@ class Bird:
         self.rect.y += self.velY
         # moving up velY is -ive
         # so vice versa is down
-        self.angle = (self.angle+1)%360
+        self.angle = -self.velY
         self.image = pygame.transform.rotate(self.origImg, self.angle)
         self.rect = self.image.get_rect(center=self.rect.center)
 
