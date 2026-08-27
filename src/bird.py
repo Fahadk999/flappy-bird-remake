@@ -34,7 +34,7 @@ class Bird:
         # so vice versa is down
         self.angle = (self.angle+1)%360
         self.image = pygame.transform.rotate(self.origImg, self.angle)
-        self.rect = self.image.get_rect(center=(self.x, self.y))
+        self.rect = self.image.get_rect(center=self.rect.center)
 
         self.hitbox.center = self.rect.center
 
