@@ -40,6 +40,7 @@ while running:
     keys = pygame.key.get_pressed()
     # GameStates
     if currState == STATEMENU:
+        currState = menustate.update(events, currState)
         menustate.draw(screen)
     elif currState == STATEPLAY:
         currState = playstate.update(events, dt, currState)

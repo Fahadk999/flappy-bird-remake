@@ -1,3 +1,4 @@
+import pygame
 from src.ui.text import Text
 
 class MenuState:
@@ -9,5 +10,15 @@ class MenuState:
        
     def draw (self, screen):
         self.gameName.draw(screen)
+
+    def update (self, events, currState):
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    currState = "PLAY"
+
+        return currState
+                    
+
 
 
