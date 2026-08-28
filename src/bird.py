@@ -10,7 +10,7 @@ class Bird:
         self.velY = 0.0
         self.angle = 0
         self.x = self.screenWidth//5
-        self.y = self.screenHeight//2
+        self.y = self.screenHeight//4
 
         self.origImg = pygame.image.load("assets/bird.png").convert_alpha()
         self.origImg = pygame.transform.smoothscale(self.origImg, (60, 38))

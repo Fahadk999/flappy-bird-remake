@@ -22,6 +22,7 @@ class Text:
     def updateText (self, text):
         self.surface = self.font.render(str(text), True, self.color)
         self.rect = self.surface.get_rect(center=(self.posX, self.posY))
+
     def updatePox (self, newX=0, newY=0):
         self.rect = self.surface.get_rect(center=(newX, newY))
 

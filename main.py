@@ -11,7 +11,7 @@ STATEMENU = "MENU"
 STATEPLAY = "PLAY"
 STATEOVER = "OVER"
 
-currState = STATEMENU
+currState = STATEPLAY
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
@@ -45,6 +45,8 @@ while running:
     elif currState == STATEPLAY:
         currState = playstate.update(events, dt, currState)
         playstate.draw(screen)
+        if currState == STATEOVER:
+            overstate.updateScore(playstate.score)
     elif currState == STATEOVER:
         playstate.draw(screen)
         overstate.draw(screen)
