@@ -17,6 +17,8 @@ currState = STATEMENU
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
+bgMusic = LoadMusic("assets/sounds/calm_music.mp3", vol=0.8)
+bgMusic.play()
 
 db.initDB()
 menustate = MenuState(WIDTH, HEIGHT)
