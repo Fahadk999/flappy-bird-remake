@@ -1,10 +1,10 @@
 import pygame
 
 class Text:
-    def __init__(self, text, posX, posY, font=None, size=48):
+    def __init__(self, text, posX, posY, font=None, size=48, color=pygame.Color("white")):
         self.posX = posX
         self.posY = posY
-        self.color = pygame.Color("white")
+        self.color = color
         self.text = str(text)
         
         self.font = pygame.font.Font(font, size)
@@ -17,7 +17,6 @@ class Text:
 
     def draw (self, screen):
         screen.blit(self.surface, self.rect)
-        pygame.draw.rect(screen, pygame.Color("red"), self.rect, width=2)
 
     def enableGlow (self):
         self.glow = True
