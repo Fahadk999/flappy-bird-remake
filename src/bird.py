@@ -1,9 +1,12 @@
 import pygame
+from src.soundloader import LoadSound
 
 class Bird:
     def __init__(self, screenWidth, screenHeight) -> None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
+
+        bouncePath = "assets/sounds/bounce.wav"
         
         self.gravity = 0.5
         self.jumpPower = -9.0
@@ -18,6 +21,7 @@ class Bird:
         self.rect = self.image.get_rect(center=(self.x,self.y))
         self.hitbox = self.rect.inflate(-20, 0)
         self.hitbox.center = self.rect.center
+        self.bounceSound = LoadSound(bouncePath)
 
     def draw (self, screen):
         screen.blit(self.image, self.rect)
@@ -27,6 +31,7 @@ class Bird:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE: 
                     self.velY = self.jumpPower
+                    self.bounceSound.play()
 
         self.velY += self.gravity
         self.rect.y += self.velY
