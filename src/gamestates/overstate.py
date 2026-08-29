@@ -8,19 +8,21 @@ class OverState:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
         self.score = score
-        self.overDisplay = LoadImage("assets/gameover.png", 1, self.screenWidth//2, self.screenHeight//5)
+        overPath = "assets/gameover.png"
+        retryPath = "assets/retry.png"
+        self.overImg = LoadImage(overPath, 1, self.screenWidth//2, self.screenHeight//5)
         self.scoreTxt = Text(f"Score: {self.score}", self.screenWidth//2, self.screenHeight//3)
         self.scoreList = [] 
-        self.retryTxt = Text("Press R to Retry", self.screenWidth//2, self.screenHeight-self.screenHeight//4)
+        self.retryImg = LoadImage(retryPath, 1, self.screenWidth//2, self.screenHeight-self.screenHeight//4)
         self.topScoreTxt = Text("Top Scores", self.screenWidth//2, self.scoreTxt.rect.y+50)
 
     def draw (self, screen):
-        self.overDisplay.draw(screen)
+        self.overImg.draw(screen)
         self.scoreTxt.draw(screen)
         self.topScoreTxt.draw(screen)
         for txt in self.scoreList:
             txt.draw(screen)
-        self.retryTxt.draw(screen)
+        self.retryImg.draw(screen)
 
     def updateScore (self, newScore):
         self.score = newScore
