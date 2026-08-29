@@ -10,11 +10,16 @@ class OverState:
         self.score = score
         overPath = "assets/gameover.png"
         retryPath = "assets/retry.png"
-        self.overImg = LoadImage(overPath, 1, self.screenWidth//2, self.screenHeight//5)
-        self.scoreTxt = Text(f"Score: {self.score}", self.screenWidth//2, self.screenHeight//3)
+        menuPath = "assets/menu.png"
+        scorePath = "assets/score.png"
+
+        self.overImg = LoadImage(overPath, 1, screenWidth//2, screenHeight//5)
+        self.scoreTxt = Text(f"Score: {self.score}", screenWidth//2, screenHeight//3)
         self.scoreList = [] 
-        self.retryImg = LoadImage(retryPath, 1, self.screenWidth//2, self.screenHeight-self.screenHeight//4)
-        self.topScoreTxt = Text("Top Scores", self.screenWidth//2, self.scoreTxt.rect.y+50)
+        self.retryImg = LoadImage(retryPath, 1, screenWidth//2, screenHeight-screenHeight//4)
+        self.menuImg = LoadImage(menuPath, 1, screenWidth//2, screenHeight-screenHeight//6)
+
+        self.topScoreTxt = Text("Top Scores", screenWidth//2, self.scoreTxt.rect.y+50)
 
     def draw (self, screen):
         self.overImg.draw(screen)
@@ -23,6 +28,11 @@ class OverState:
         for txt in self.scoreList:
             txt.draw(screen)
         self.retryImg.draw(screen)
+        self.menuImg.draw(screen)
+
+    def update(self, dt):
+        self.retryImg.idleAnimationY(dt, 1, 50)
+        self.menuImg.idleAnimationY(dt, -1, 50)
 
     def updateScore (self, newScore):
         self.score = newScore

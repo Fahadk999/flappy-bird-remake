@@ -55,6 +55,7 @@ while running:
             overstate.updateScoreList(topScores)
     elif currState == STATEOVER:
         playstate.draw(screen)
+        overstate.update(dt)
         overstate.draw(screen)
 
     pygame.display.flip()
