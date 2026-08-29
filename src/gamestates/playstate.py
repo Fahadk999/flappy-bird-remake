@@ -17,7 +17,7 @@ class PlayState:
         self.score = 0
         self.scoreImg = LoadImage(scorePath, 1, 55, 25)
         self.scoreStr = int(self.score)
-        self.scoreTxt = Text(self.scoreStr, 140, 25, fontPath, 35)
+        self.scoreTxt = Text(self.scoreStr, 110, 25, fontPath, 35)
         # fix the score to auto set it self when longer
 
         self.pipeGap = 200

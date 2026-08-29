@@ -10,12 +10,14 @@ class Text:
         self.font = pygame.font.Font(font, size)
         self.surface = self.font.render(self.text, True, self.color)
         self.rect = self.surface.get_rect(center=(self.posX, self.posY))
+        self.fixedX = self.rect.x
         self.glow = False
         self.glowTimer = 0
         self.glowInterval = 300
 
     def draw (self, screen):
         screen.blit(self.surface, self.rect)
+        pygame.draw.rect(screen, pygame.Color("red"), self.rect, width=2)
 
     def enableGlow (self):
         self.glow = True
@@ -23,6 +25,7 @@ class Text:
     def updateText (self, text):
         self.surface = self.font.render(str(text), True, self.color)
         self.rect = self.surface.get_rect(center=(self.posX, self.posY))
+        self.adjust()
 
     def updatePox (self, newX=0, newY=0):
         self.rect = self.surface.get_rect(center=(newX, newY))
@@ -38,4 +41,7 @@ class Text:
                 self.color = pygame.Color("white")
                 self.surface = self.font.render(self.text, True, self.color)
                 self.glow = False
-    
+
+    def adjust (self):
+        self.rect.x = self.fixedX+self.rect.width//2
+            

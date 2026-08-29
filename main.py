@@ -3,6 +3,7 @@ from src.gamestates.menustate import MenuState
 from src.gamestates.playstate import PlayState
 from src.gamestates.overstate import OverState
 from src.database import db_manager as db
+from player import Player
 
 pygame.init()
 
@@ -57,6 +58,7 @@ while running:
         playstate.draw(screen)
         overstate.update(dt)
         overstate.draw(screen)
+
 
     pygame.display.flip()
 
