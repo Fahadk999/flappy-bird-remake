@@ -3,6 +3,7 @@ from random import randint
 from src.ui.imageloader import LoadImage
 from src.bird import Bird
 from src.pipe import Pipe
+from src.soundloader import LoadSound
 
 class PlayState:
     def __init__(self, screenWidth, screenHeight) -> None:
@@ -10,6 +11,7 @@ class PlayState:
         self.screenHeight = screenHeight
 
         scorePath = "assets/score.png"
+        lossSoundPath = "assets/sounds/loss_trumpet.wav"
         self.fontPath = "assets/fonts/customfont.otf"
         
         self.bird = Bird(screenWidth, screenHeight)
@@ -18,6 +20,7 @@ class PlayState:
         self.scoreImg = LoadImage(scorePath, 1, 55, 25)
         self.scoreStr = int(self.score)
         self.scoreTxt = Text(self.scoreStr, 110, 25, self.fontPath, 35)
+        self.lossSound = LoadSound(lossSoundPath, 2.0)
 
         self.pipeGap = 200
         self.pipeSpawnTimer = 0
@@ -30,7 +33,8 @@ class PlayState:
         for p in self.pipes:
             p.update()
             if self.bird.collsion(p):
-               currState = "OVER"
+                currState = "OVER"
+                self.lossSound.play()
         if self.bird.rect.y > self.screenHeight+200:
            currState = "OVER"
         elif self.bird.rect.y < -200:

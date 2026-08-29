@@ -21,7 +21,7 @@ class Bird:
         self.rect = self.image.get_rect(center=(self.x,self.y))
         self.hitbox = self.rect.inflate(-20, 0)
         self.hitbox.center = self.rect.center
-        self.bounceSound = LoadSound(bouncePath)
+        self.bounceSound = LoadSound(bouncePath, 2.0)
 
     def draw (self, screen):
         screen.blit(self.image, self.rect)
