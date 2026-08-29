@@ -10,14 +10,14 @@ class PlayState:
         self.screenHeight = screenHeight
 
         scorePath = "assets/score.png"
-        fontPath = "assets/fonts/customfont.otf"
+        self.fontPath = "assets/fonts/customfont.otf"
         
         self.bird = Bird(screenWidth, screenHeight)
         self.pipes = []
         self.score = 0
         self.scoreImg = LoadImage(scorePath, 1, 55, 25)
         self.scoreStr = int(self.score)
-        self.scoreTxt = Text(self.scoreStr, 110, 25, fontPath, 35)
+        self.scoreTxt = Text(self.scoreStr, 110, 25, self.fontPath, 35)
         # fix the score to auto set it self when longer
 
         self.pipeGap = 200
@@ -67,7 +67,7 @@ class PlayState:
         self.pipes.clear()
         self.score = 0
         self.scoreStr = int(self.score)
-        self.scoreTxt = Text(self.scoreStr, 120, 25)
+        self.scoreTxt = Text(self.scoreStr, 110, 25, self.fontPath, 35)
         self.pipeSpawnTimer = 0
         self.bird.resetBird()
         

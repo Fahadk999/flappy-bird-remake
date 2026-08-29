@@ -36,7 +36,9 @@ while running:
             elif event.key == pygame.K_r and currState == STATEOVER:
                 currState = STATEPLAY
                 playstate.resetGame()
-
+            elif event.key == pygame.K_m and currState == STATEOVER:
+                currState = STATEMENU
+                playstate.resetGame()
 
     screen.fill(pygame.Color("lightblue"))
 
