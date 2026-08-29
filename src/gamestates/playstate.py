@@ -1,5 +1,6 @@
 from src.ui.text import Text
 from random import randint
+from src.ui.imageloader import LoadImage
 from src.bird import Bird
 from src.pipe import Pipe
 
@@ -8,11 +9,16 @@ class PlayState:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
 
+        scorePath = "assets/score.png"
+        fontPath = "assets/fonts/customfont.otf"
+        
         self.bird = Bird(screenWidth, screenHeight)
         self.pipes = []
         self.score = 0
-        self.scoreStr = f"Score: {int(self.score)}"
-        self.scoreTxt = Text(self.scoreStr, 75, 25)
+        self.scoreImg = LoadImage(scorePath, 1, 55, 25)
+        self.scoreStr = int(self.score)
+        self.scoreTxt = Text(self.scoreStr, 140, 25, fontPath, 35)
+        # fix the score to auto set it self when longer
 
         self.pipeGap = 200
         self.pipeSpawnTimer = 0
@@ -31,7 +37,7 @@ class PlayState:
         elif self.bird.rect.y < -200:
            currState = "OVER"
 
-        self.scoreTxt.updateText(f"Score: {int(self.score)}")
+        self.scoreTxt.updateText(int(self.score))
         return currState
 
     def draw (self, screen):
@@ -40,6 +46,7 @@ class PlayState:
             p.draw(screen)
 
         self.scoreTxt.draw(screen)
+        self.scoreImg.draw(screen)
 
     def spawnPipe (self, dt):
         # every 1.5 seconds
@@ -59,8 +66,8 @@ class PlayState:
     def resetGame (self):
         self.pipes.clear()
         self.score = 0
-        self.scoreStr = f"Score: {int(self.score)}"
-        self.scoreTxt = Text(self.scoreStr, 75, 25)
+        self.scoreStr = int(self.score)
+        self.scoreTxt = Text(self.scoreStr, 120, 25)
         self.pipeSpawnTimer = 0
         self.bird.resetBird()
         

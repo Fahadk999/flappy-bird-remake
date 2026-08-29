@@ -1,12 +1,13 @@
 import pygame
 
 class Text:
-    def __init__(self, text, posX, posY):
+    def __init__(self, text, posX, posY, font=None, size=48):
         self.posX = posX
         self.posY = posY
         self.color = pygame.Color("white")
         self.text = str(text)
-        self.font = pygame.font.Font(None, 48)
+        
+        self.font = pygame.font.Font(font, size)
         self.surface = self.font.render(self.text, True, self.color)
         self.rect = self.surface.get_rect(center=(self.posX, self.posY))
         self.glow = False
