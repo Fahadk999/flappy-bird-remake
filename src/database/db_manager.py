@@ -1,15 +1,18 @@
 import sqlite3
+import os
+from abs_path import absPath
 
-DBNAME = "leaderboard.db"
+
+DBNAME = os.path.join(os.getcwd(), "leaderboard.db")
 def initDB ():
     conn = sqlite3.connect(DBNAME)
     cursor = conn.cursor()
-
-    with open("src/database/schema.sql", "r") as f:
+    path = absPath("src/database/schema.sql")
+    with open(path, "r") as f:
         cursor.executescript(f.read())
 
     conn.commit()
-    conn.close
+    conn.close()
 
 def saveScore (score):
     name = "YOU"
@@ -34,4 +37,5 @@ def getScores(limit=5):
     cursor.execute(sql, (limit,))
     topScores = cursor.fetchall()
     conn.close()
+    
     return topScores

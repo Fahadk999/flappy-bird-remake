@@ -2,18 +2,19 @@ import pygame
 from src.ui.text import Text
 from src.ui.imageloader import LoadImage
 from src.soundloader import LoadSound
+from abs_path import absPath
 
 class OverState:
     def __init__(self, screenWidth, screenHeight, score=0) -> None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
         self.score = score
-        overPath = "assets/gameover.png"
-        retryPath = "assets/retry.png"
-        menuPath = "assets/menu.png"
-        scorePath = "assets/score.png"
-        buttonSfxPath = "assets/sounds/buttonclick.wav"
-        self.fontPath = "assets/fonts/customfont.otf"
+        overPath = absPath("assets/gameover.png")
+        retryPath = absPath("assets/retry.png")
+        menuPath = absPath("assets/menu.png")
+        scorePath = absPath("assets/score.png")
+        buttonSfxPath = absPath("assets/sounds/buttonclick.wav")
+        self.fontPath = absPath("assets/fonts/customfont.otf")
 
         self.overImg = LoadImage(overPath, 1, screenWidth//2, screenHeight//5)
         self.scoreTxt = Text(int(self.score), screenWidth//2, screenHeight//3, self.fontPath, 35)

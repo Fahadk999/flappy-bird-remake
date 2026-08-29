@@ -1,12 +1,13 @@
 import pygame
 from src.soundloader import LoadSound
+from abs_path import absPath
 
 class Bird:
     def __init__(self, screenWidth, screenHeight) -> None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
 
-        bouncePath = "assets/sounds/bounce.wav"
+        bouncePath = absPath("assets/sounds/bounce.wav")
         
         self.gravity = 0.5
         self.jumpPower = -9.0
@@ -15,7 +16,7 @@ class Bird:
         self.x = self.screenWidth//5
         self.y = self.screenHeight//4
 
-        self.origImg = pygame.image.load("assets/bird.png").convert_alpha()
+        self.origImg = pygame.image.load(absPath("assets/bird.png")).convert_alpha()
         self.origImg = pygame.transform.smoothscale(self.origImg, (60, 38))
         self.image = self.origImg.copy()
         self.rect = self.image.get_rect(center=(self.x,self.y))

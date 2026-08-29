@@ -2,14 +2,15 @@ import pygame
 from src.ui.text import Text
 from src.ui.imageloader import LoadImage
 from src.soundloader import LoadSound
+from abs_path import absPath
 
 class MenuState:
     def __init__ (self, screenWidth, screenHeight)->None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
-        titlePath = "assets/flappyburd.png"
-        playPath = "assets/play.png"
-        buttonSfxPath = "assets/sounds/buttonclick.wav"
+        titlePath = absPath("assets/flappyburd.png")
+        playPath = absPath("assets/play.png")
+        buttonSfxPath = absPath("assets/sounds/buttonclick.wav")
 
         self.titleImg = LoadImage(titlePath, 1, screenWidth//2, screenHeight//2)
         self.playImg = LoadImage(playPath, 1, screenWidth//2, screenHeight-screenHeight//3)

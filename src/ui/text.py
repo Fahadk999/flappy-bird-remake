@@ -1,4 +1,5 @@
 import pygame
+# from abs_path import absPath
 
 class Text:
     def __init__(self, text, posX, posY, font=None, size=48, color=pygame.Color("white")):

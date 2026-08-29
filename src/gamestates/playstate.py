@@ -4,15 +4,16 @@ from src.ui.imageloader import LoadImage
 from src.bird import Bird
 from src.pipe import Pipe
 from src.soundloader import LoadSound
+from abs_path import absPath
 
 class PlayState:
     def __init__(self, screenWidth, screenHeight) -> None:
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
 
-        scorePath = "assets/score.png"
-        lossSoundPath = "assets/sounds/loss_trumpet.wav"
-        self.fontPath = "assets/fonts/customfont.otf"
+        scorePath = absPath("assets/score.png")
+        lossSoundPath = absPath("assets/sounds/loss_trumpet.wav")
+        self.fontPath = absPath("assets/fonts/customfont.otf")
         
         self.bird = Bird(screenWidth, screenHeight)
         self.pipes = []
@@ -59,7 +60,7 @@ class PlayState:
             upPipe = Pipe(self.screenWidth, self.screenHeight)
             downPipe = Pipe(self.screenWidth, self.screenHeight, rotation=1)
             pipeHeight = upPipe.rect.height
-            posY = randint(upPipe.upMinY, upPipe.upMaxY) # will be rand, limits will be the max and min Y of the up pipe
+            posY = randint(upPipe.upMinY, upPipe.upMaxY)
             upPipe.setPosY(posY)
             downPipe.setPosY(upPipe.rect.y-pipeHeight-self.pipeGap)
             self.pipes.append(upPipe)

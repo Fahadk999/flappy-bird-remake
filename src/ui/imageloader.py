@@ -1,10 +1,10 @@
 import pygame
-# from utils import resource_path
+from abs_path import absPath
 
 class LoadImage:
     def __init__(self, path, scale, posX, posY):
-        # self.fullPath = resource_path(path)
-        self.rawImage = pygame.image.load(path).convert_alpha()
+        self.path = absPath(path)
+        self.rawImage = pygame.image.load(self.path).convert_alpha()
         self.image = pygame.transform.scale_by(
             self.rawImage, scale
         )
@@ -36,7 +36,6 @@ class LoadImage:
             else:
                 self.rect.y += speed
             self.idleYTimer -= interval
-
         if abs(speed) == speed:
             if self.rect.y >= self.maxY:
                 self.idleYUpDir = True

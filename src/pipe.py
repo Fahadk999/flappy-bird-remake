@@ -1,4 +1,5 @@
 import pygame
+from abs_path import absPath
 
 class Pipe:
     def __init__(
@@ -11,7 +12,7 @@ class Pipe:
         self.screenHeight = screenHeight
         self.speed = 5
 
-        self.image = pygame.image.load("assets/pipe.png").convert_alpha()
+        self.image = pygame.image.load(absPath("assets/pipe.png")).convert_alpha()
         self.image = pygame.transform.smoothscale(self.image, (100, 500))
         self.rect = self.image.get_rect(center=(100,500))
         if rotation == 1:
