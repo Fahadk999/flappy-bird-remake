@@ -1,6 +1,7 @@
 import pygame
 from src.ui.text import Text
 from src.ui.imageloader import LoadImage
+from src.soundloader import LoadSound
 
 class OverState:
     def __init__(self, screenWidth, screenHeight, score=0) -> None:
@@ -12,12 +13,14 @@ class OverState:
         retryPath = "assets/retry.png"
         menuPath = "assets/menu.png"
         scorePath = "assets/score.png"
+        buttonSfxPath = "assets/sounds/buttonclick.wav"
 
         self.overImg = LoadImage(overPath, 1, screenWidth//2, screenHeight//5)
         self.scoreTxt = Text(f"Score: {self.score}", screenWidth//2, screenHeight//3)
         self.scoreList = [] 
         self.retryImg = LoadImage(retryPath, 1, screenWidth//2, screenHeight-screenHeight//4)
         self.menuImg = LoadImage(menuPath, 1, screenWidth//2, screenHeight-screenHeight//6)
+        self.buttonSound = LoadSound(buttonSfxPath, 0.5)
 
         self.topScoreTxt = Text("Top Scores", screenWidth//2, self.scoreTxt.rect.y+50)
 
@@ -37,9 +40,11 @@ class OverState:
         for e in events:
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_r:
+                    self.buttonSound.play()
                     playstate.resetGame()
                     currState = "PLAY"
                 if e.key == pygame.K_m:
+                    self.buttonSound.play()
                     playstate.resetGame()
                     currState = "MENU"
 

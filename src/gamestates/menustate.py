@@ -1,6 +1,7 @@
 import pygame
 from src.ui.text import Text
 from src.ui.imageloader import LoadImage
+from src.soundloader import LoadSound
 
 class MenuState:
     def __init__ (self, screenWidth, screenHeight)->None:
@@ -8,9 +9,11 @@ class MenuState:
         self.screenHeight = screenHeight
         titlePath = "assets/flappyburd.png"
         playPath = "assets/play.png"
+        buttonSfxPath = "assets/sounds/buttonclick.wav"
 
         self.titleImg = LoadImage(titlePath, 1, screenWidth//2, screenHeight//2)
         self.playImg = LoadImage(playPath, 1, screenWidth//2, screenHeight-screenHeight//3)
+        self.buttonSound = LoadSound(buttonSfxPath, 0.5)
        
     def draw (self, screen):
         self.titleImg.draw(screen)
@@ -20,6 +23,7 @@ class MenuState:
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
+                    self.buttonSound.play()
                     currState = "PLAY"
         self.titleImg.idleAnimationY(dt, 2, 100)
 

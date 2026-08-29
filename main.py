@@ -3,7 +3,7 @@ from src.gamestates.menustate import MenuState
 from src.gamestates.playstate import PlayState
 from src.gamestates.overstate import OverState
 from src.database import db_manager as db
-from src.soundloader import *
+from src.soundloader import LoadMusic
 
 pygame.init()
 
@@ -14,9 +14,6 @@ STATEPLAY = "PLAY"
 STATEOVER = "OVER"
 
 currState = STATEMENU
-
-buttonSfxPath = "assets/sounds/buttonclick.wav"
-buttonSound = LoadSound(buttonSfxPath, 0.5)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
@@ -57,7 +54,6 @@ while running:
         playstate.draw(screen)
         currState = overstate.update(dt, events, currState, playstate)
         overstate.draw(screen)
-
 
     pygame.display.flip()
 
