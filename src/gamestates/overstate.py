@@ -30,9 +30,20 @@ class OverState:
         self.retryImg.draw(screen)
         self.menuImg.draw(screen)
 
-    def update(self, dt):
+    def update(self, dt, events, currState, playstate):
         self.retryImg.idleAnimationY(dt, 1, 50)
         self.menuImg.idleAnimationY(dt, -1, 50)
+
+        for e in events:
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_r:
+                    playstate.resetGame()
+                    currState = "PLAY"
+                if e.key == pygame.K_m:
+                    playstate.resetGame()
+                    currState = "MENU"
+
+        return currState
 
     def updateScore (self, newScore):
         self.score = newScore

@@ -3,6 +3,7 @@ from src.gamestates.menustate import MenuState
 from src.gamestates.playstate import PlayState
 from src.gamestates.overstate import OverState
 from src.database import db_manager as db
+from src.soundloader import *
 
 pygame.init()
 
@@ -13,6 +14,9 @@ STATEPLAY = "PLAY"
 STATEOVER = "OVER"
 
 currState = STATEMENU
+
+buttonSfxPath = "assets/sounds/buttonclick.wav"
+buttonSound = LoadSound(buttonSfxPath, 0.5)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 clock = pygame.time.Clock()
@@ -32,12 +36,6 @@ while running:
         if event.type == pygame.KEYDOWN: 
             if event.key == pygame.K_ESCAPE:
                 running = False
-            elif event.key == pygame.K_r and currState == STATEOVER:
-                currState = STATEPLAY
-                playstate.resetGame()
-            elif event.key == pygame.K_m and currState == STATEOVER:
-                currState = STATEMENU
-                playstate.resetGame()
 
     screen.fill(pygame.Color("lightblue"))
 
@@ -57,7 +55,7 @@ while running:
             overstate.updateScoreList(topScores)
     elif currState == STATEOVER:
         playstate.draw(screen)
-        overstate.update(dt)
+        currState = overstate.update(dt, events, currState, playstate)
         overstate.draw(screen)
 
 
